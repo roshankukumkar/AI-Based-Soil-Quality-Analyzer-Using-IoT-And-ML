@@ -4,7 +4,7 @@ An IoT and Machine Learning based system for monitoring soil and recommending su
 
 ## Project Overview
 
-The **AI-Based Soil Quality Analyzer Using IoT** collects soil and environmental data using sensors connected to an ESP32/Arduino device.
+The **AI-Based Soil Quality Analyzer Using IoT** collects soil and environmental data using sensors connected to an ESP32 device.
 
 The collected values are processed by a Flask-based Python application. A **Random Forest Classifier** is used to predict the most suitable crop based on the input parameters.
 
@@ -26,9 +26,9 @@ The predicted crop and confidence value are displayed through a web interface.
 ```text
 Soil & Environmental Sensors
             ↓
-       ESP32 / Arduino
+           ESP32
             ↓
-       Serial Communication
+   Serial Communication
             ↓
        Flask Backend
             ↓
@@ -64,7 +64,7 @@ Soil & Environmental Sensors
 
 ### Hardware / IoT
 
-* ESP32 / Arduino
+* ESP32
 * Soil Moisture Sensor
 * DHT11
 * NPK Sensor
@@ -73,7 +73,7 @@ Soil & Environmental Sensors
 ## Project Structure
 
 ```text
-IOT_AI-BASED-SQA/
+AI-Based-Soil-Quality-Analyzer-Using-IoT-And-ML/
 │
 ├── app.py
 ├── requirements.txt
@@ -149,13 +149,13 @@ The dataset contains soil and environmental parameters used for crop prediction.
 ### 1. Clone the repository
 
 ```bash
-git clone <YOUR-GITHUB-REPOSITORY-URL>
+git clone https://github.com/roshankukumkar/AI-Based-Soil-Quality-Analyzer-Using-IoT-And-ML.git
 ```
 
 ### 2. Open the project directory
 
 ```bash
-cd IOT_AI-BASED-SQA
+cd AI-Based-Soil-Quality-Analyzer-Using-IoT-And-ML
 ```
 
 ### 3. Install dependencies
@@ -174,7 +174,7 @@ The application will run locally using Flask.
 
 ## Hardware
 
-The original project uses an ESP32/Arduino-based setup for collecting sensor data.
+The original project uses an **ESP32-based setup** for collecting sensor data.
 
 The sensor data is transferred to the Python application through serial communication.
 

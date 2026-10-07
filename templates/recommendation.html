@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Smart Farming Tips</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #3a5a40, #588157);
+        }
+
+        .card {
+            width: 450px;
+            padding: 30px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(15px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            text-align: center;
+            color: #1b4332;
+        }
+
+        ul {
+            text-align: left;
+            margin-top: 15px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        .sensor-box {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 15px;
+            padding: 12px 20px;
+            border-radius: 8px;
+            border: none;
+            background: #2d6a4f;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #1b4332;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+
+    <h2>🌾 Smart Farming Recommendations</h2>
+
+    <!-- SENSOR DATA -->
+    <div class="sensor-box">
+        <h3>📡 Live Sensor Status</h3>
+
+        <p>🌡 Temperature: <span id="temp">--</span> °C</p>
+        <p>💧 Humidity: <span id="hum">--</span> %</p>
+        <p>🌱 Soil Moisture: <span id="moist">--</span> %</p>
+
+        <p>🧪 NPK: Not enabled in current system</p>
+    </div>
+
+    <!-- TIPS -->
+    <ul>
+        <li>🌱 Use organic compost for better soil health.</li>
+        <li>💧 Irrigate based on soil moisture level.</li>
+        <li>📊 Monitor temperature & humidity regularly.</li>
+        <li>⚖ Avoid over-fertilization.</li>
+        <li>🌾 Choose crops based on AI recommendation.</li>
+    </ul>
+
+    <a href="/">
+        <button>🏠 Back to Home</button>
+    </a>
+
+</div>
+
+<!-- JS -->
+<script>
+function getSensorData() {
+
+    fetch('/get_sensor_data')
+        .then(res => res.json())
+        .then(data => {
+
+            document.getElementById("temp").innerText = data.temperature;
+            document.getElementById("hum").innerText = data.humidity;
+            document.getElementById("moist").innerText = data.soil_moisture;
+        })
+        .catch(err => {
+            console.log("Sensor error", err);
+        });
+}
+
+window.onload = getSensorData;
+setInterval(getSensorData, 3000);
+</script>
+
+</body>
+</html>

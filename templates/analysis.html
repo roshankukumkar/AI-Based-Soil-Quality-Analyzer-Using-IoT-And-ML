@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Soil & Climate Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        body{
+            margin:0;
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            font-family:'Poppins', sans-serif;
+            background:linear-gradient(135deg,#3a5a40,#588157,#a3b18a);
+        }
+
+        .card{
+            width:500px;
+            padding:35px;
+            border-radius:20px;
+            background:rgba(255,255,255,0.2);
+            backdrop-filter:blur(15px);
+            box-shadow:0 15px 35px rgba(0,0,0,0.3);
+            text-align:center;
+            color:#1b4332;
+        }
+
+        h2{
+            margin-bottom:15px;
+        }
+
+        p{
+            font-size:14px;
+            margin-bottom:15px;
+        }
+
+        ul{
+            text-align:left;
+            margin-top:15px;
+            padding-left:20px;
+        }
+
+        li{
+            margin-bottom:10px;
+            font-size:14px;
+        }
+
+        button{
+            margin-top:20px;
+            padding:12px 20px;
+            background:#2d6a4f;
+            color:white;
+            border:none;
+            border-radius:10px;
+            cursor:pointer;
+            font-weight:600;
+        }
+
+        button:hover{
+            background:#1b4332;
+            transform:scale(1.05);
+        }
+
+        .back-btn{
+            background:#40916c;
+            margin-top:10px;
+        }
+
+        .sensor-box{
+            margin-top:15px;
+            padding:12px;
+            background:rgba(255,255,255,0.3);
+            border-radius:10px;
+            font-size:14px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>📊 Soil & Climate Analysis Report</h2>
+
+    <p>
+        Based on the values from IoT sensors and user inputs, our AI system analyzes
+        soil nutrients and environmental conditions to determine agricultural suitability.
+    </p>
+
+    <!-- 🔥 LIVE SENSOR DATA -->
+    <div class="sensor-box">
+        <h3>📡 Current Sensor Values</h3>
+        <p>🌡 Temperature: <span id="temp">--</span> °C</p>
+        <p>💧 Humidity: <span id="hum">--</span> %</p>
+        <p>🌱 Soil Moisture: <span id="moist">--</span> %</p>
+        <p>🧪 Nitrogen (N): <span id="n_val">--</span></p>
+        <p>🧪 Phosphorus (P): <span id="p_val">--</span></p>
+        <p>🧪 Potassium (K): <span id="k_val">--</span></p>
+    </div>
+
+    <ul>
+        <li>🌱 NPK levels indicate soil fertility condition for crop growth.</li>
+        <li>💧 Soil moisture supports root development and nutrient absorption.</li>
+        <li>🌡 Temperature is suitable for plant metabolic activities.</li>
+        <li>🌦 Rainfall and moisture contribute to irrigation balance.</li>
+        <li>⚖ Soil pH ensures proper nutrient uptake efficiency.</li>
+        <li>📈 Combined factors indicate overall crop growth potential.</li>
+    </ul>
+
+    <a href="/recommendation">
+        <button>🌾 View Smart Recommendations</button>
+    </a>
+
+    <br>
+
+    <a href="/">
+        <button class="back-btn">🏠 Back to Home</button>
+    </a>
+
+</div>
+
+<!-- 🔥 JAVASCRIPT FOR LIVE DATA -->
+
+<script>
+function getSensorData() {
+    fetch('/get_sensor_data')
+        .then(response => response.json())
+        .then(data => {
+
+            if (data.error) {
+                console.log("Sensor Error:", data.error);
+                return;
+            }
+
+            document.getElementById("temp").innerText = data.temperature;
+            document.getElementById("hum").innerText = data.humidity;
+            document.getElementById("moist").innerText = data.soil_moisture;
+
+            document.getElementById("n_val").innerText = data.N;
+            document.getElementById("p_val").innerText = data.P;
+            document.getElementById("k_val").innerText = data.K;
+        });
+}
+
+window.onload = getSensorData;
+setInterval(getSensorData, 5000);
+</script>
+
+</body>
+</html>
